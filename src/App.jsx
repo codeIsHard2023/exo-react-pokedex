@@ -1,5 +1,6 @@
 import './App.css'
 import PokemonCard from './components/PokemonCard'
+import NavBar from './components/NavBar';
 import { useState } from 'react';
 
 
@@ -31,30 +32,12 @@ function App() {
   ];
   
   const [pokemonIndex, setPokemonIndex] = useState(0)
-  
   const [buttonBackward, setButtonBackward] = useState({className : 'hide'})
   const [buttonForward, setButtonForward] = useState({className : 'show'})
-  
-  const handleClickForward = () => {
-    setPokemonIndex((previousIndex) => {
-      const newIndex = previousIndex + 1;
-  
-      if (newIndex >= pokemonList.length - 1) {
-        setButtonForward({ className: 'hide' });
-        setButtonBackward({ className: 'show' });
-      } else {
-        setButtonForward({ className: 'show' });
-        setButtonBackward({ className: 'show' });
-      }
-  
-      return newIndex;
-    });
-  };
   
   const handleClickBackward = () => {
     setPokemonIndex((previousIndex) => {
       const newIndex = previousIndex - 1;
-  
       if (newIndex <= 0) {
         setButtonBackward({ className: 'hide' });
         setButtonForward({ className: 'show' });
@@ -62,20 +45,30 @@ function App() {
         setButtonBackward({ className: 'show' });
         setButtonForward({ className: 'show' });
       }
-  
+      return newIndex;
+    });
+  };
+
+  const handleClickForward = () => {
+    setPokemonIndex((previousIndex) => {
+      const newIndex = previousIndex + 1;
+      if (newIndex >= pokemonList.length - 1) {
+        setButtonForward({ className: 'hide' });
+        setButtonBackward({ className: 'show' });
+      } else {
+        setButtonForward({ className: 'show' });
+        setButtonBackward({ className: 'show' });
+      }
       return newIndex;
     });
   };
   
-
-
   return (
-    <div>
+    <>
     <PokemonCard pokemon = {pokemonList[pokemonIndex]}/>
-    {console.log(pokemonList[pokemonIndex])}
-    <button className={buttonBackward.className} onClick={handleClickBackward}>Précedent </button>
-    <button className={buttonForward.className} onClick={handleClickForward}>Suivant </button>
-    </div>
+    <NavBar classNameBackward={buttonBackward} classNameForward={buttonForward}
+    clickBackward = {handleClickBackward} clickForward={handleClickForward}/>
+    </>
   );
 }
 
