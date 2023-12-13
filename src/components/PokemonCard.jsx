@@ -1,29 +1,26 @@
 /* eslint-disable react/prop-types */
 import PropTypes from "prop-types";
 
-function PokemonCard({pokemon}) {
-
-    return (
+function PokemonCard({ pokemon }) {
+  return (
     <>
       <figure>
-        {
-        pokemon.imgSrc !== undefined ? 
-        (<img src = {pokemon.imgSrc} alt = {pokemon.name}/>) 
-        : 
-        (<p>???</p>)
-        }
+        {pokemon.imgSrc !== undefined ? (
+          <img src={pokemon.imgSrc} alt={pokemon.name} />
+        ) : (
+          <p>???</p>
+        )}
         <figcaption>{pokemon.name}</figcaption>
-      </figure>     
+      </figure>
     </>
-    )
+  );
 }
 
 PokemonCard.propTypes = {
-  pokemon : PropTypes.shape({
+  pokemon: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    imgSrc : PropTypes.string.isRequired,
+    imgSrc: PropTypes.string.isRequired,
   }).isRequired,
-}
+};
 
 export default PokemonCard;
-

@@ -1,13 +1,17 @@
+import "./NavBar.css";
 
-function NavBar ({classNameBackward, classNameForward, clickBackward,clickForward }) {
-    
-   return ( 
-   <div>
-        <button className={classNameBackward.className} onClick={clickBackward} > Précedent </button>
-        <button className={classNameForward.className} onClick={clickForward} > Suivant </button> 
-        
+function NavBar({ pokemonList, setPokemonIndex }) {
+  return (
+    <div className="button-container">
+      {pokemonList.map((pokemon, index) => {
+        return (
+          <button key={pokemon.name} onClick={() => setPokemonIndex(index)}>
+            {pokemon.name}
+          </button>
+        );
+      })}
     </div>
-    )
+  );
 }
 
 export default NavBar;
